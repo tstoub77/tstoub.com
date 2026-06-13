@@ -9,768 +9,153 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy:       #1A2A3A;
-      --slate:      #2E4057;
-      --offwhite:   #F5F2EB;
-      --teal:       #2A9D8F;
-      --gold:       #C9A84C;
-      --civic:      #4A7CBF;
-      --muted:      #8A9AAA;
-      --border:     #D4CFC6;
-      --text:       #1A2A3A;
+      --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB;
+      --teal: #2A9D8F; --gold: #C9A84C; --civic: #4A7CBF;
+      --muted: #8A9AAA; --border: #D4CFC6; --text: #1A2A3A;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: "Inter", sans-serif; background: var(--offwhite); color: var(--text); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--offwhite);
-      color: var(--text);
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2.5rem;
-      height: 60px;
-      background: rgba(26, 42, 58, 0.97);
-      backdrop-filter: blur(8px);
-    }
-    .nav-logo {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--teal);
-      letter-spacing: 0.08em;
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(245,242,235,0.7);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 60px; background: rgba(26,42,58,0.97); backdrop-filter: blur(8px); }
+    .nav-logo { font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; color: var(--teal); letter-spacing: 0.08em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,235,0.7); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--offwhite); }
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      padding: 0 2.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg-lines {
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 119px,
-          rgba(42,157,143,0.04) 119px,
-          rgba(42,157,143,0.04) 120px
-        );
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      padding-top: 60px;
-    }
-    .hero-text {}
-    .hero-eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.25rem;
-    }
-    .hero-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      line-height: 1.05;
-      color: var(--offwhite);
-      margin-bottom: 1.5rem;
-    }
-    .role-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-bottom: 2rem;
-    }
-    .role-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .role-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .role-dot.teal   { background: var(--teal); }
-    .role-dot.gold   { background: var(--gold); }
-    .role-dot.civic  { background: var(--civic); }
-    .role-label {
-      font-size: 1.05rem;
-      color: rgba(245,242,235,0.85);
-      font-weight: 300;
-      letter-spacing: 0.01em;
-    }
-    .hero-quote {
-      font-family: 'DM Serif Display', serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: rgba(245,242,235,0.45);
-      line-height: 1.5;
-      border-left: 2px solid var(--teal);
-      padding-left: 1rem;
-      margin-top: 2rem;
-    }
-    .hero-quote cite {
-      display: block;
-      font-style: normal;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--teal);
-      margin-top: 0.5rem;
-    }
-    .hero-photo-col {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero-photo-frame {
-      position: relative;
-      width: 320px;
-      height: 380px;
-    }
-    .hero-photo-frame::before {
-      content: '';
-      position: absolute;
-      top: 16px; left: 16px;
-      right: -16px; bottom: -16px;
-      border: 2px solid var(--teal);
-      border-radius: 4px;
-      opacity: 0.4;
-    }
-    .hero-photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 4px;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--slate);
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-photo-placeholder svg {
-      opacity: 0.3;
-    }
-    .hero-photo-placeholder span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .hero-scroll span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--teal), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
+    #hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; padding: 0 2.5rem; position: relative; overflow: hidden; }
+    .hero-bg-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(42,157,143,0.04) 119px, rgba(42,157,143,0.04) 120px); pointer-events: none; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding-top: 60px; }
+    .hero-eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem; }
+    .hero-name { font-family: "DM Serif Display", serif; font-size: clamp(3rem,5vw,4.5rem); line-height: 1.05; color: var(--offwhite); margin-bottom: 1.5rem; }
+    .role-stack { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .role-item { display: flex; align-items: center; gap: 0.75rem; }
+    .role-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .role-dot.teal { background: var(--teal); }
+    .role-dot.gold { background: var(--gold); }
+    .role-dot.civic { background: var(--civic); }
+    .role-label { font-size: 1.05rem; color: rgba(245,242,235,0.85); font-weight: 300; }
+    .hero-quote { font-family: "DM Serif Display", serif; font-style: italic; font-size: 0.95rem; color: rgba(245,242,235,0.45); line-height: 1.5; border-left: 2px solid var(--teal); padding-left: 1rem; margin-top: 2rem; }
+    .hero-quote cite { display: block; font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--teal); margin-top: 0.5rem; }
+    .hero-photo-col { display: flex; justify-content: center; align-items: center; }
+    .hero-photo-frame { position: relative; width: 320px; height: 380px; }
+    .hero-photo-frame::before { content: ""; position: absolute; top: 16px; left: 16px; right: -16px; bottom: -16px; border: 2px solid var(--teal); border-radius: 4px; opacity: 0.4; }
+    .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; border-radius: 4px; position: relative; z-index: 1; }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .hero-scroll span { font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--teal), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
 
-    /* ── SECTION BASE ── */
-    section {
-      padding: 6rem 2.5rem;
-    }
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .section-eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.75rem;
-    }
-    .section-eyebrow.gold-eye  { color: var(--gold); }
+    section { padding: 6rem 2.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem; }
+    .section-eyebrow.gold-eye { color: var(--gold); }
     .section-eyebrow.civic-eye { color: var(--civic); }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 3.5vw, 2.75rem);
-      line-height: 1.1;
-      color: var(--navy);
-      margin-bottom: 1rem;
-    }
+    .section-title { font-family: "DM Serif Display", serif; font-size: clamp(2rem,3.5vw,2.75rem); line-height: 1.1; color: var(--navy); margin-bottom: 1rem; }
     .section-title.light { color: var(--offwhite); }
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: var(--teal);
-      margin-bottom: 2.5rem;
-    }
-    .divider.gold  { background: var(--gold); }
+    .divider { width: 48px; height: 3px; background: var(--teal); margin-bottom: 2.5rem; }
+    .divider.gold { background: var(--gold); }
     .divider.civic { background: var(--civic); }
 
-    /* ── ABOUT ── */
-    #about {
-      background: var(--offwhite);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p {
-      font-size: 1.1rem;
-      color: #3a4a5a;
-      margin-bottom: 1.25rem;
-      line-height: 1.75;
-    }
-    .competencies {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-    .tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      color: var(--slate);
-      background: white;
-    }
-    .about-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-    .stat-block {
-      border-left: 3px solid var(--teal);
-      padding-left: 1.25rem;
-    }
-    .stat-number {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.5rem;
-      line-height: 1;
-      color: var(--navy);
-    }
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-top: 0.25rem;
-      font-weight: 400;
-    }
+    #about { background: var(--offwhite); }
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+    .about-text p { font-size: 1.1rem; color: #3a4a5a; margin-bottom: 1.25rem; line-height: 1.75; }
+    .competencies { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+    .tag { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; padding: 0.35rem 0.75rem; border: 1px solid var(--border); border-radius: 2px; color: var(--slate); background: white; }
+    .about-stats { display: flex; flex-direction: column; gap: 2rem; }
+    .stat-block { border-left: 3px solid var(--teal); padding-left: 1.25rem; }
+    .stat-number { font-family: "DM Serif Display", serif; font-size: 2.5rem; line-height: 1; color: var(--navy); }
+    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
 
-    /* ── EXPERIENCE ── */
-    #experience {
-      background: var(--navy);
-    }
-    .exp-intro {
-      font-size: 1.05rem;
-      color: rgba(245,242,235,0.7);
-      max-width: 620px;
-      margin-bottom: 3rem;
-      line-height: 1.75;
-    }
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      bottom: 8px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--teal), rgba(42,157,143,0.1));
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 3rem;
-      padding-left: 1.5rem;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -2rem;
-      top: 8px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--teal);
-      border: 2px solid var(--navy);
-      box-shadow: 0 0 0 3px rgba(42,157,143,0.2);
-    }
-    .timeline-item.current::before {
-      background: var(--teal);
-      box-shadow: 0 0 0 4px rgba(42,157,143,0.3);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(42,157,143,0.3); }
-      50% { box-shadow: 0 0 0 8px rgba(42,157,143,0.1); }
-    }
-    .timeline-period {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      color: var(--teal);
-      margin-bottom: 0.35rem;
-    }
-    .timeline-role {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.35rem;
-      color: var(--offwhite);
-      margin-bottom: 0.2rem;
-    }
-    .timeline-org {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-      font-weight: 500;
-    }
-    .timeline-desc {
-      font-size: 0.92rem;
-      color: rgba(245,242,235,0.65);
-      line-height: 1.7;
-      max-width: 680px;
-    }
-    .timeline-bullets {
-      margin-top: 0.75rem;
-      padding-left: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    .timeline-bullets li {
-      font-size: 0.88rem;
-      color: rgba(245,242,235,0.6);
-      line-height: 1.6;
-      padding-left: 1rem;
-      position: relative;
-    }
-    .timeline-bullets li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--teal);
-      font-size: 0.75rem;
-    }
-    .portfolio-callout {
-      margin-top: 3.5rem;
-      background: rgba(42,157,143,0.08);
-      border: 1px solid rgba(42,157,143,0.2);
-      border-radius: 4px;
-      padding: 2rem 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 2rem;
-    }
-    .callout-item {}
-    .callout-number {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.25rem;
-      color: var(--teal);
-      line-height: 1;
-    }
-    .callout-label {
-      font-size: 0.82rem;
-      color: rgba(245,242,235,0.55);
-      margin-top: 0.25rem;
-    }
+    #experience { background: var(--navy); }
+    .exp-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 620px; margin-bottom: 3rem; line-height: 1.75; }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--teal), rgba(42,157,143,0.1)); }
+    .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 1.5rem; }
+    .timeline-item::before { content: ""; position: absolute; left: -2rem; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--teal); border: 2px solid var(--navy); box-shadow: 0 0 0 3px rgba(42,157,143,0.2); }
+    .timeline-item.current::before { animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 4px rgba(42,157,143,0.3)} 50%{box-shadow:0 0 0 8px rgba(42,157,143,0.1)} }
+    .timeline-period { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--teal); margin-bottom: 0.35rem; }
+    .timeline-role { font-family: "DM Serif Display", serif; font-size: 1.35rem; color: var(--offwhite); margin-bottom: 0.2rem; }
+    .timeline-org { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem; font-weight: 500; }
+    .timeline-desc { font-size: 0.92rem; color: rgba(245,242,235,0.65); line-height: 1.7; max-width: 680px; }
+    .timeline-bullets { margin-top: 0.75rem; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .timeline-bullets li { font-size: 0.88rem; color: rgba(245,242,235,0.6); line-height: 1.6; padding-left: 1rem; position: relative; }
+    .timeline-bullets li::before { content: "4"; position: absolute; left: 0; color: var(--teal); font-size: 0.75rem; }
+    .portfolio-callout { margin-top: 3.5rem; background: rgba(42,157,143,0.08); border: 1px solid rgba(42,157,143,0.2); border-radius: 4px; padding: 2rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+    .callout-number { font-family: "DM Serif Display", serif; font-size: 2.25rem; color: var(--teal); line-height: 1; }
+    .callout-label { font-size: 0.82rem; color: rgba(245,242,235,0.55); margin-top: 0.25rem; }
 
-    /* ── CONSULTING ── */
-    #consulting {
-      background: var(--slate);
-    }
-    .consulting-intro {
-      font-size: 1.05rem;
-      color: rgba(245,242,235,0.7);
-      max-width: 640px;
-      margin-bottom: 3rem;
-      line-height: 1.75;
-    }
-    .app-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .app-card {
-      background: rgba(26,42,58,0.6);
-      border: 1px solid rgba(42,157,143,0.15);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-    .app-card:hover {
-      border-color: rgba(42,157,143,0.4);
-      transform: translateY(-3px);
-    }
-    .app-screenshot {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: top left;
-      display: block;
-      background: var(--navy);
-    }
-    .app-screenshot-placeholder {
-      width: 100%;
-      height: 200px;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .app-body {
-      padding: 1.5rem;
-    }
-    .app-badge {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.5rem;
-    }
-    .app-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--offwhite);
-      margin-bottom: 0.6rem;
-    }
-    .app-desc {
-      font-size: 0.85rem;
-      color: rgba(245,242,235,0.6);
-      line-height: 1.65;
-    }
-    .consulting-services {
-      margin-top: 3rem;
-    }
-    .services-title {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.5rem;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .service-item {
-      padding: 1.25rem 1.5rem;
-      background: rgba(26,42,58,0.5);
-      border-left: 2px solid var(--teal);
-    }
-    .service-name {
-      font-size: 0.9rem;
-      color: var(--offwhite);
-      font-weight: 500;
-      margin-bottom: 0.35rem;
-    }
-    .service-desc {
-      font-size: 0.8rem;
-      color: rgba(245,242,235,0.5);
-      line-height: 1.6;
-    }
+    #consulting { background: var(--slate); }
+    .consulting-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 640px; margin-bottom: 3rem; line-height: 1.75; }
+    .app-card { background: rgba(26,42,58,0.6); border: 1px solid rgba(42,157,143,0.15); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; max-width: 680px; }
+    .app-card:hover { border-color: rgba(42,157,143,0.4); transform: translateY(-3px); }
+    .app-body { padding: 1.5rem; }
+    .app-badge { font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+    .app-title { font-family: "DM Serif Display", serif; font-size: 1.2rem; color: var(--offwhite); margin-bottom: 0.6rem; }
+    .app-desc { font-size: 0.85rem; color: rgba(245,242,235,0.6); line-height: 1.65; }
+    .app-screenshot-mockup { width: 100%; background: #1e3a4a; padding: 0; display: flex; flex-direction: column; }
+    .app-screenshot-mockup .mock-header { background: #1a5c6e; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .app-screenshot-mockup .mock-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .consulting-services { margin-top: 3rem; }
+    .services-title { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .service-item { padding: 1.25rem 1.5rem; background: rgba(26,42,58,0.5); border-left: 2px solid var(--teal); }
+    .service-name { font-size: 0.9rem; color: var(--offwhite); font-weight: 500; margin-bottom: 0.35rem; }
+    .service-desc { font-size: 0.8rem; color: rgba(245,242,235,0.5); line-height: 1.6; }
 
-    /* ── FARM ── */
-    #farm {
-      background: #2A1F0E;
-      position: relative;
-      overflow: hidden;
-    }
-    .farm-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .farm-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
+    #board { background: var(--offwhite); }
+    .board-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 4rem; align-items: start; }
+    .board-sidebar { position: sticky; top: 80px; }
+    .board-sidebar img { width: 100%; border-radius: 4px; margin-bottom: 1.5rem; object-fit: cover; max-height: 280px; }
+    .board-badge { display: inline-block; background: var(--civic); color: white; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; padding: 0.35rem 0.75rem; border-radius: 2px; margin-bottom: 1.5rem; }
+    .board-stat-large { font-family: "DM Serif Display", serif; font-size: 3rem; color: var(--civic); line-height: 1; margin-bottom: 0.25rem; }
+    .board-stat-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+    .board-content p { font-size: 1rem; color: #3a4a5a; line-height: 1.75; margin-bottom: 1.25rem; }
+    .board-priorities { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .board-priority { padding: 1rem 1.25rem; border-left: 3px solid var(--civic); background: white; }
+    .priority-label { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--civic); margin-bottom: 0.25rem; }
+    .priority-text { font-size: 0.9rem; color: var(--slate); line-height: 1.6; }
+
+    #farm { background: #2A1F0E; position: relative; overflow: hidden; }
+    .farm-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%); pointer-events: none; }
+    .farm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .farm-text .section-title { color: var(--offwhite); }
-    .farm-body {
-      font-size: 1rem;
-      color: rgba(245,242,235,0.7);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .farm-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
-    .farm-detail {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 0.88rem;
-      color: rgba(245,242,235,0.6);
-    }
-    .farm-detail-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .farm-photos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 0.75rem;
-      height: 420px;
-    }
-    .farm-photo {
-      border-radius: 3px;
-      overflow: hidden;
-      background: rgba(201,168,76,0.08);
-    }
-    .farm-photo:first-child {
-      grid-row: span 2;
-    }
-    .farm-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .farm-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(201,168,76,0.06);
-    }
+    .farm-body { font-size: 1rem; color: rgba(245,242,235,0.7); line-height: 1.8; margin-bottom: 1.5rem; }
+    .farm-details { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .farm-detail { display: flex; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: rgba(245,242,235,0.6); }
+    .farm-detail-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .farm-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.75rem; height: 420px; }
+    .farm-photo { border-radius: 3px; overflow: hidden; }
+    .farm-photo:first-child { grid-row: span 2; }
+    .farm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* ── SCHOOL BOARD ── */
-    #board {
-      background: var(--offwhite);
-    }
-    .board-grid {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .board-sidebar {
-      position: sticky;
-      top: 80px;
-    }
-    .board-badge {
-      display: inline-block;
-      background: var(--civic);
-      color: white;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      padding: 0.35rem 0.75rem;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-    }
-    .board-stat-large {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3rem;
-      color: var(--civic);
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-    .board-stat-sub {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .board-content p {
-      font-size: 1rem;
-      color: #3a4a5a;
-      line-height: 1.75;
-      margin-bottom: 1.25rem;
-    }
-    .board-priorities {
-      margin-top: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .board-priority {
-      padding: 1rem 1.25rem;
-      border-left: 3px solid var(--civic);
-      background: white;
-    }
-    .priority-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--civic);
-      margin-bottom: 0.25rem;
-    }
-    .priority-text {
-      font-size: 0.9rem;
-      color: var(--slate);
-      line-height: 1.6;
-    }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--navy);
-      text-align: center;
-    }
-    .contact-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .contact-lead {
-      font-size: 1.1rem;
-      color: rgba(245,242,235,0.65);
-      line-height: 1.75;
-      margin-bottom: 2.5rem;
-    }
-    .contact-email {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.75rem;
-      color: var(--teal);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 2rem;
-      transition: color 0.2s;
-    }
+    #contact { background: var(--navy); text-align: center; }
+    .contact-inner { max-width: 640px; margin: 0 auto; }
+    .contact-lead { font-size: 1.1rem; color: rgba(245,242,235,0.65); line-height: 1.75; margin-bottom: 2.5rem; }
+    .contact-email { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--teal); text-decoration: none; display: block; margin-bottom: 2rem; transition: color 0.2s; }
     .contact-email:hover { color: var(--offwhite); }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    .contact-link {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 2px;
-    }
-    .contact-link:hover {
-      color: var(--offwhite);
-      border-bottom-color: var(--teal);
-    }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; }
+    .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .contact-link:hover { color: var(--offwhite); border-bottom-color: var(--teal); }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #111D27;
-      padding: 1.5rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-mono {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      color: rgba(138,154,170,0.5);
-    }
+    footer { background: #111D27; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-mono { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(138,154,170,0.5); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-photo-col { display: none; }
       .about-grid { grid-template-columns: 1fr; }
-      .app-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr 1fr; }
       .farm-grid { grid-template-columns: 1fr; }
       .board-grid { grid-template-columns: 1fr; }
       .portfolio-callout { grid-template-columns: 1fr; gap: 1.5rem; }
       .nav-links { display: none; }
     }
-
     @media (max-width: 600px) {
       section { padding: 4rem 1.25rem; }
       .services-grid { grid-template-columns: 1fr; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       .scroll-line, .timeline-item.current::before { animation: none; }
       html { scroll-behavior: auto; }
@@ -779,7 +164,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#hero" class="nav-logo">tstoub.com</a>
   <ul class="nav-links">
@@ -797,7 +181,7 @@
   <div class="hero-bg-lines"></div>
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Regional Director · Operator · Builder</p>
+      <p class="hero-eyebrow">Regional Director &middot; Operator &middot; Builder</p>
       <h1 class="hero-name">Tim<br>Stoub</h1>
       <div class="role-stack">
         <div class="role-item">
@@ -812,10 +196,14 @@
           <span class="role-dot civic"></span>
           <span class="role-label">Elected Trustee, Peotone CUSD 207-U</span>
         </div>
+        <div class="role-item">
+          <span class="role-dot teal"></span>
+          <span class="role-label">Consultant &amp; App Developer</span>
+        </div>
       </div>
       <blockquote class="hero-quote">
         If one advances confidently in the direction of his dreams, and endeavors to live the life which he has imagined, he will meet with a success unexpected in common hours.
-        <cite>— Henry David Thoreau</cite>
+        <cite>&mdash; Henry David Thoreau</cite>
       </blockquote>
     </div>
     <div class="hero-photo-col">
@@ -838,7 +226,7 @@
     <div class="divider"></div>
     <div class="about-grid">
       <div class="about-text">
-        <p>For more than 15 years, Tim Stoub has been responsible for the physical environments where older adults live, recover, and thrive. From a single campus to a portfolio of eleven senior living communities across Illinois, his work has always centered on one question: does this place feel safe, dignified, and cared for?</p>
+        <p>For more than 15 years, Tim Stoub has been responsible for the physical environments where older adults live, recover, and thrive. From a single campus to a portfolio of eleven senior living communities across the Midwest, his work has always centered on one question: does this place feel safe, dignified, and cared for?</p>
         <p>As Regional Director of Plant Operations at Franciscan Ministries, Tim leads a cross-functional plant operations function spanning capital project development, life safety compliance, preventive maintenance, and regulatory readiness. He is building the department from the ground up, creating standards, tools, and systems that will outlast any single role.</p>
         <p>Before joining Franciscan Ministries, Tim spent 15 years at Peace Village Senior Living in Palos Park, rising from Facilities Manager to Director of Facilities. He oversaw multi-year CapEx budgets, led architect and contractor selection, managed IDPH compliance, and developed leadership programming from the frontline to the boardroom.</p>
         <p>His background before senior living includes years of hands-on carpentry and contracting work, including residential renovations, healthcare retrofits, and accessibility improvements. That trade foundation shapes how he approaches every project: detail first, operations second, experience always.</p>
@@ -883,17 +271,13 @@
     <p class="section-eyebrow">Career</p>
     <h2 class="section-title light">Where the work happened.</h2>
     <div class="divider"></div>
-    <p class="exp-intro">A 25-year career built from the ground up — literally. From journeyman carpenter to regional director, every role added a layer that the next one required.</p>
-
+    <p class="exp-intro">A 25-year career built from the ground up. From journeyman carpenter to regional director, every role added a layer that the next one required.</p>
     <div class="timeline">
-
       <div class="timeline-item current">
-        <div class="timeline-period">Sep 2025 — Present</div>
+        <div class="timeline-period">Sep 2025 &mdash; Present</div>
         <div class="timeline-role">Regional Director of Plant Operations</div>
-        <div class="timeline-org">Franciscan Ministries · Lemont, IL</div>
-        <div class="timeline-desc">
-          Leading plant operations across eleven senior living communities including Addolorata Villa, Franciscan Village, Mount Alverna Village, Marian Village, St. Joseph Village, University Place, Village at Mercy Creek, and Village at Victory Lakes. Actively formalizing Plant Operations as a department, building standards, compliance tools, and budget frameworks that function at portfolio scale.
-        </div>
+        <div class="timeline-org">Franciscan Ministries &middot; Lemont, IL</div>
+        <div class="timeline-desc">Leading plant operations across eleven senior living communities in the Midwest. Actively formalizing Plant Operations as a department, building standards, compliance tools, and budget frameworks that function at portfolio scale.</div>
         <ul class="timeline-bullets">
           <li>Developing portfolio-wide CapEx and unit turn planning tools and workflows</li>
           <li>Building a mock survey program to create a culture of regulatory readiness across all campuses</li>
@@ -902,52 +286,43 @@
           <li>Serving as primary plant operations resource for Executive Directors and senior leadership</li>
         </ul>
       </div>
-
       <div class="timeline-item">
-        <div class="timeline-period">2013 — 2025 · 12 years</div>
+        <div class="timeline-period">2013 &mdash; 2025 &middot; 12 years</div>
         <div class="timeline-role">Director of Facilities</div>
-        <div class="timeline-org">Peace Village Senior Living · Palos Park, IL</div>
-        <div class="timeline-desc">
-          Led all facilities operations for a multi-level senior living community for over a decade. Built and managed annual and multi-year CapEx programs, oversaw architect selection, contractor bidding, permitting, and project execution, and reported KPIs directly to executive leadership and the board of directors.
-        </div>
+        <div class="timeline-org">Peace Village Senior Living &middot; Palos Park, IL</div>
+        <div class="timeline-desc">Led all facilities operations for a multi-level senior living community for over a decade. Built and managed annual and multi-year CapEx programs, oversaw architect selection, contractor bidding, permitting, and project execution.</div>
         <ul class="timeline-bullets">
-          <li>Developed and implemented preventive maintenance programs that reduced equipment downtime by 15%</li>
+          <li>Developed preventive maintenance programs that reduced equipment downtime by 15%</li>
           <li>Directed front desk, security, maintenance, and housekeeping departments</li>
           <li>Ensured full compliance with IDPH and local jurisdictional regulatory standards</li>
           <li>Designed and facilitated leadership development programming for staff at all levels</li>
         </ul>
       </div>
-
       <div class="timeline-item">
-        <div class="timeline-period">2010 — 2013 · 3 years</div>
+        <div class="timeline-period">2010 &mdash; 2013 &middot; 3 years</div>
         <div class="timeline-role">Facilities Manager</div>
-        <div class="timeline-org">Peace Village Senior Living · Palos Park, IL</div>
+        <div class="timeline-org">Peace Village Senior Living &middot; Palos Park, IL</div>
         <div class="timeline-desc">Developed internal teams for capital project execution and renovation, directed day-to-day building operations, managed scheduled maintenance activities, and oversaw Life Safety system compliance.</div>
       </div>
-
       <div class="timeline-item">
-        <div class="timeline-period">2007 — 2010 · 3 years</div>
+        <div class="timeline-period">2007 &mdash; 2010 &middot; 3 years</div>
         <div class="timeline-role">Owner / Operations Manager</div>
         <div class="timeline-org">AKT Contracting, Inc.</div>
         <div class="timeline-desc">Founded and operated a contracting business through the housing downturn, managing residential renovations and small healthcare retrofits with a focus on accessibility improvements for aging populations.</div>
       </div>
-
       <div class="timeline-item">
-        <div class="timeline-period">2002 — 2007 · 5 years</div>
+        <div class="timeline-period">2002 &mdash; 2007 &middot; 5 years</div>
         <div class="timeline-role">Carpenter / Project Manager</div>
         <div class="timeline-org">NuRidge Construction</div>
         <div class="timeline-desc">Managed construction projects from planning through completion, developing the project management discipline and trade knowledge that would define his later facilities career.</div>
       </div>
-
       <div class="timeline-item">
-        <div class="timeline-period">1995 — 2002 · 7 years</div>
+        <div class="timeline-period">1995 &mdash; 2002 &middot; 7 years</div>
         <div class="timeline-role">Journeyman Carpenter</div>
-        <div class="timeline-org">Patrick Cantrell and Co. · Local 434 · Tarc Trim</div>
+        <div class="timeline-org">Patrick Cantrell and Co. &middot; Local 434 &middot; Tarc Trim</div>
         <div class="timeline-desc">Completed an apprenticeship and earned journeyman status in carpentry. Developed the foundational trade skills and work ethic that anchor everything that followed.</div>
       </div>
-
     </div>
-
     <div class="portfolio-callout">
       <div class="callout-item">
         <div class="callout-number">11</div>
@@ -962,7 +337,6 @@
         <div class="callout-label">Combined trade and facilities experience</div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -972,109 +346,35 @@
     <p class="section-eyebrow">Consulting &amp; Tools</p>
     <h2 class="section-title light">Operational software built by a practitioner.</h2>
     <div class="divider"></div>
-    <p class="consulting-intro">Tim builds web-based tools purpose-built for senior living plant operations — not generic software adapted for the industry, but applications designed from direct field experience. Available for licensing or custom development.</p>
-
-    <div class="app-grid">
-      <div class="app-card">
-        <!-- Drop in fas-survey-screenshot.png to replace this mockup -->
-        <div class="app-screenshot-placeholder" style="display:flex; flex-direction:column; gap:0; padding:0; background:#1e3a4a;">
-          <div style="background:#1a5c6e; padding:8px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:#8de; letter-spacing:0.08em;">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.55rem; background:#b8f000; color:#111; padding:2px 6px; border-radius:2px;">FAS V1</span>
-          </div>
-          <div style="padding:12px 16px; flex:1; display:flex; flex-direction:column; gap:8px;">
-            <div style="font-family:'Inter',sans-serif; font-size:0.75rem; color:#2A9D8F; font-weight:600;">Survey Setup</div>
-            <div style="background:rgba(255,255,255,0.08); height:20px; border-radius:2px; display:flex; align-items:center; padding:0 8px;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.35);">Select a community...</span></div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">AL</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">MC</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">SNF</span></div>
-            </div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.15); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.4);">Spot Check · 24</span></div>
-              <div style="flex:1; background:#2A9D8F; height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:#fff; font-weight:600;">Standard · 45</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.15); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.4);">Intensive · 63</span></div>
-            </div>
-            <div style="background:#2A9D8F; height:24px; border-radius:2px; display:flex; align-items:center; justify-content:center; margin-top:4px;"><span style="font-size:0.65rem; color:#fff; font-weight:600; letter-spacing:0.05em;">Generate Survey</span></div>
-          </div>
+    <p class="consulting-intro">Tim builds web-based tools purpose-built for senior living plant operations &mdash; not generic software adapted for the industry, but applications designed from direct field experience. Available for licensing or custom development through private consulting.</p>
+    <div class="app-card">
+      <div class="app-screenshot-mockup">
+        <div class="mock-header">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:#8de;letter-spacing:0.08em;">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;background:#b8f000;color:#111;padding:2px 6px;border-radius:2px;">FAS V1</span>
         </div>
-        <div class="app-body">
-          <div class="app-badge">Franciscan Advisory Services · FAS V1</div>
-          <div class="app-title">Mock Life Safety Survey</div>
-          <div class="app-desc">Configurable survey preparation tool for senior living communities. Set community, care levels (AL, MC, SNF), surveyor, date, and intensity from Spot Check (24 items) through Intensive (63 items). Generates a ready-to-use survey set for staff readiness training.</div>
-        </div>
-
-      </div>
-
-    </div>tion id="consulting">
-  <div class="section-inner">
-    <p class="section-eyebrow">Consulting &amp; Tools</p>
-    <h2 class="section-title light">Operational software built by a practitioner.</h2>
-    <div class="divider"></div>
-    <p class="consulting-intro">Tim builds web-based tools purpose-built for senior living plant operations — not generic software adapted for the industry, but applications designed from direct field experience. Available for licensing or custom development.</p>
-
-    <div class="app-grid">
-      <div class="app-card">
-        <!-- Drop in fas-survey-screenshot.png to replace this mockup -->
-        <div class="app-screenshot-placeholder" style="display:flex; flex-direction:column; gap:0; padding:0; background:#1e3a4a;">
-          <div style="background:#1a5c6e; padding:8px 14px; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:#8de; letter-spacing:0.08em;">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.55rem; background:#b8f000; color:#111; padding:2px 6px; border-radius:2px;">FAS V1</span>
+        <div class="mock-body">
+          <div style="font-size:0.75rem;color:#2A9D8F;font-weight:600;">Survey Setup</div>
+          <div style="background:rgba(255,255,255,0.08);height:20px;border-radius:2px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.35);">Select a community...</span></div>
+          <div style="display:flex;gap:6px;">
+            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">AL</span></div>
+            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">MC</span></div>
+            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">SNF</span></div>
           </div>
-          <div style="padding:12px 16px; flex:1; display:flex; flex-direction:column; gap:8px;">
-            <div style="font-family:'Inter',sans-serif; font-size:0.75rem; color:#2A9D8F; font-weight:600;">Survey Setup</div>
-            <div style="background:rgba(255,255,255,0.08); height:20px; border-radius:2px; display:flex; align-items:center; padding:0 8px;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.35);">Select a community...</span></div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">AL</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">MC</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.2); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">SNF</span></div>
-            </div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.15); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.4);">Spot Check · 24</span></div>
-              <div style="flex:1; background:#2A9D8F; height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:#fff; font-weight:600;">Standard · 45</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.15); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.4);">Intensive · 63</span></div>
-            </div>
-            <div style="background:#2A9D8F; height:24px; border-radius:2px; display:flex; align-items:center; justify-content:center; margin-top:4px;"><span style="font-size:0.65rem; color:#fff; font-weight:600; letter-spacing:0.05em;">Generate Survey</span></div>
+          <div style="display:flex;gap:6px;">
+            <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Spot Check &middot; 24</span></div>
+            <div style="flex:1;background:#2A9D8F;height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:#fff;font-weight:600;">Standard &middot; 45</span></div>
+            <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Intensive &middot; 63</span></div>
           </div>
-        </div>
-        <div class="app-body">
-          <div class="app-badge">Franciscan Advisory Services · FAS V1</div>
-          <div class="app-title">Mock Life Safety Survey</div>
-          <div class="app-desc">Configurable survey preparation tool for senior living communities. Set community, care levels (AL, MC, SNF), surveyor, date, and intensity from Spot Check (24 items) through Intensive (63 items). Generates a ready-to-use survey set for staff readiness training.</div>
+          <div style="background:#2A9D8F;height:24px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:4px;"><span style="font-size:0.65rem;color:#fff;font-weight:600;letter-spacing:0.05em;">Generate Survey</span></div>
         </div>
       </div>
-
-      <div class="app-card">
-        <!-- Drop in fm-survey-screenshot.png to replace this mockup -->
-        <div class="app-screenshot-placeholder" style="display:flex; flex-direction:column; gap:0; padding:0; background:#1a2a3a;">
-          <div style="background:#1A2A3A; padding:8px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #C9A84C;">
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:#C9A84C; letter-spacing:0.08em;">FRANCISCAN MINISTRIES | PLANT OPERATIONS</span>
-            <span style="font-family:'IBM Plex Mono',monospace; font-size:0.55rem; background:rgba(201,168,76,0.2); color:#C9A84C; padding:2px 6px; border-radius:2px; border:1px solid #C9A84C;">V1.3</span>
-          </div>
-          <div style="padding:12px 16px; flex:1; display:flex; flex-direction:column; gap:8px;">
-            <div style="font-family:'Inter',sans-serif; font-size:0.75rem; color:#2A9D8F; font-weight:600;">Survey Setup</div>
-            <div style="background:rgba(255,255,255,0.06); height:20px; border-radius:2px; display:flex; align-items:center; padding:0 8px;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.3);">Select a community...</span></div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(201,168,76,0.3); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">AL</span></div>
-              <div style="flex:1; border:1px solid rgba(201,168,76,0.3); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">MC</span></div>
-              <div style="flex:1; border:1px solid rgba(201,168,76,0.3); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.6rem; color:rgba(255,255,255,0.6); font-weight:600;">SNF</span></div>
-            </div>
-            <div style="display:flex; gap:6px;">
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.1); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.35);">Spot Check · 24</span></div>
-              <div style="flex:1; background:#2A9D8F; height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:#fff; font-weight:600;">Standard · 45</span></div>
-              <div style="flex:1; border:1px solid rgba(255,255,255,0.1); height:22px; border-radius:2px; display:flex; align-items:center; justify-content:center;"><span style="font-size:0.55rem; color:rgba(255,255,255,0.35);">Intensive · 63</span></div>
-            </div>
-            <div style="background:#2A9D8F; height:24px; border-radius:2px; display:flex; align-items:center; justify-content:center; margin-top:4px;"><span style="font-size:0.65rem; color:#fff; font-weight:600; letter-spacing:0.05em;">Generate Survey</span></div>
-          </div>
-        </div>
-        <div class="app-body">
-          <div class="app-badge">Franciscan Ministries Plant Operations · V1.3</div>
-          <div class="app-title">FM Mock Life Safety Survey</div>
-          <div class="app-desc">The same battle-tested survey tool rebranded for internal Franciscan Ministries use. Deployed across the portfolio to support the mock survey program and build a culture of no surprises ahead of state inspections. Actively maintained and updated.</div>
-        </div>
+      <div class="app-body">
+        <div class="app-badge">Plant Operations &middot; FAS V1</div>
+        <div class="app-title">Mock Life Safety Survey</div>
+        <div class="app-desc">Configurable survey preparation tool for senior living communities. Set community, care levels (AL, MC, SNF), surveyor, date, and intensity from Spot Check (24 items) through Intensive (63 items). Generates a ready-to-use survey set for staff readiness training ahead of state inspections.</div>
       </div>
     </div>
-
     <div class="consulting-services">
       <p class="services-title">Advisory Services Available</p>
       <div class="services-grid">
@@ -1092,7 +392,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1101,18 +400,18 @@
   <div class="section-inner">
     <div class="board-grid">
       <div class="board-sidebar">
-        <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" style="width:100%; border-radius:4px; margin-bottom:1.5rem; object-fit:cover; max-height:280px;" />
+        <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" />
         <span class="board-badge">Elected Trustee</span>
         <p class="section-eyebrow civic-eye">Peotone CUSD 207-U</p>
         <h2 class="section-title">Public service<br>is a responsibility.</h2>
         <div class="divider civic"></div>
         <div class="board-stat-large">2021</div>
-        <div class="board-stat-sub">First elected · Re-elected 2025</div>
+        <div class="board-stat-sub">First elected &middot; Re-elected 2025</div>
       </div>
       <div class="board-content">
         <p>Tim has served on the Peotone CUSD 207-U School Board since 2021, re-elected in 2025, bringing the same discipline he applies to operational management to the governance of a public school district. His focus is grounded in fiscal accountability, transparency, and protecting the long-term health of the district for students and taxpayers alike.</p>
         <p>As a Tier 4 district under Evidence-Based Funding, Peotone faces the ongoing challenge of flat year-over-year EBF revenue. Tim has been engaged on deficit reduction strategy, facility consolidation, and analysis of emerging revenue sources including solar energy projects serving Will County.</p>
-        <p>He believes elected service is not about performing consensus — it is about representing constituents honestly, asking hard questions in public, and standing behind the record. He often casts dissenting votes when the numbers or the process demand it.</p>
+        <p>He believes elected service is not about performing consensus. It is about representing constituents honestly, asking hard questions in public, and standing behind the record. He often casts dissenting votes when the numbers or the process demand it.</p>
         <div class="board-priorities">
           <div class="board-priority">
             <div class="priority-label">Fiscal Discipline</div>
@@ -1135,14 +434,14 @@
 <!-- FARM -->
 <section id="farm">
   <div class="farm-bg"></div>
-  <div class="section-inner" style="position:relative; z-index:1;">
+  <div class="section-inner" style="position:relative;z-index:1;">
     <div class="farm-grid">
       <div class="farm-text">
         <p class="section-eyebrow gold-eye">Stoub Family Farms</p>
         <h2 class="section-title">Rooted in<br>Peotone.</h2>
         <div class="divider gold"></div>
-        <p class="farm-body">Tim and his wife Katie operate Stoub Family Farms LLC in Peotone, Illinois. What started as a sweet corn operation has grown into a diversified direct-market farm with a community following of over 3,000 — including a U-pick strawberry operation that has become a staple of the local community each season.</p>
-        <p class="farm-body">The farm grows U-pick strawberries, sweet corn, melons, tomatoes, peppers, and cucurbits, with a fertigation system, honey resale, free-range chickens, and a farmers market presence. Every season is managed with the same precision and care Tim brings to facilities work.</p>
+        <p class="farm-body">Tim and his wife Katie operate Stoub Family Farms LLC in Peotone, Illinois. What started as a sweet corn operation has grown into a diversified direct-market farm with a community following of over 3,000 &mdash; including a U-pick strawberry operation that has become a staple of the local community each season.</p>
+        <p class="farm-body">The farm grows sweet corn, melons, tomatoes, peppers, and cucurbits alongside the strawberries, with a fertigation system, honey resale, free-range chickens, and a farmers market presence. Every season is managed with the same precision and care Tim brings to facilities work.</p>
         <div class="farm-details">
           <div class="farm-detail"><span class="farm-detail-dot"></span>U-pick strawberries, sweet corn &amp; melons</div>
           <div class="farm-detail"><span class="farm-detail-dot"></span>Fertigation system for precision growing</div>
@@ -1152,15 +451,9 @@
         </div>
       </div>
       <div class="farm-photos">
-        <div class="farm-photo">
-          <img src="farm1.jpg" alt="Family transplanting on the farm" />
-        </div>
-        <div class="farm-photo">
-          <img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" />
-        </div>
-        <div class="farm-photo">
-          <img src="farm3.jpg" alt="Tim and son on the tractor" />
-        </div>
+        <div class="farm-photo"><img src="farm1.jpg" alt="Family transplanting on the farm" /></div>
+        <div class="farm-photo"><img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" /></div>
+        <div class="farm-photo"><img src="farm3.jpg" alt="Tim and son on the tractor" /></div>
       </div>
     </div>
   </div>
@@ -1169,10 +462,10 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
-    <p class="section-eyebrow" style="text-align:center; color: var(--teal); margin-bottom: 1.5rem;">Get in Touch</p>
-    <h2 class="section-title light" style="text-align:center; margin-bottom: 1rem;">Let's talk operations.</h2>
-    <div class="divider" style="margin: 0 auto 2rem;"></div>
-    <p class="contact-lead">Whether you are exploring consulting services, building out plant operations at a senior living organization, or looking to license operational tools — Tim is happy to have the conversation.</p>
+    <p class="section-eyebrow" style="text-align:center;color:var(--teal);margin-bottom:1.5rem;">Get in Touch</p>
+    <h2 class="section-title light" style="text-align:center;margin-bottom:1rem;">Let's talk operations.</h2>
+    <div class="divider" style="margin:0 auto 2rem;"></div>
+    <p class="contact-lead">Whether you are exploring consulting services, building out plant operations at a senior living organization, or looking to license operational tools &mdash; Tim is happy to have the conversation.</p>
     <a href="mailto:timothy.a.stoub@gmail.com" class="contact-email">timothy.a.stoub@gmail.com</a>
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/tim-stoub-38057329/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
@@ -1185,7 +478,7 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-mono">tstoub.com</span>
-  <span class="footer-mono">Tim Stoub · Lemont, IL · &copy; 2026</span>
+  <span class="footer-mono">Tim Stoub &middot; Lemont, IL &middot; &copy; 2026</span>
 </footer>
 
 </body>
