@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tim Stoub</title>
+  <meta name="description" content="Regional Director of Plant Operations, Stoub Family Farms, and Peotone School Board Trustee." />
   <!-- Favicon & Apple Touch Icon -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -17,16 +18,16 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB;
       --teal: #2A9D8F; --gold: #C9A84C; --civic: #4A7CBF;
-      --muted: #8A9AAA; --border: #D4CFC6; --text: #1A2A3A;
+      --muted: #8A9AAA; --border: #D4CFC6;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: "Inter", sans-serif; background: var(--offwhite); color: var(--text); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { font-family: "Inter", sans-serif; background: var(--offwhite); color: var(--navy); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 60px; background: rgba(26,42,58,0.97); backdrop-filter: blur(8px); }
     .nav-logo { font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; color: var(--teal); letter-spacing: 0.08em; text-decoration: none; }
@@ -75,8 +76,10 @@
     .tag { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; padding: 0.35rem 0.75rem; border: 1px solid var(--border); border-radius: 2px; color: var(--slate); background: white; }
     .about-stats { display: flex; flex-direction: column; gap: 2rem; }
     .stat-block { border-left: 3px solid var(--teal); padding-left: 1.25rem; }
-    .stat-number { font-family: "DM Serif Display", serif; font-size: 2.5rem; line-height: 1; color: var(--navy); }
-    .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+    /* Shared "big number + caption" component, reused by .stat-block, .callout-item and .board-stat-large/-sub below */
+    .stat-value { font-family: "DM Serif Display", serif; line-height: 1; }
+    .stat-caption { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+    .stat-block .stat-value { font-size: 2.5rem; color: var(--navy); }
 
     #experience { background: var(--navy); }
     .exp-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 620px; margin-bottom: 3rem; line-height: 1.75; }
@@ -92,10 +95,10 @@
     .timeline-desc { font-size: 0.92rem; color: rgba(245,242,235,0.65); line-height: 1.7; max-width: 680px; }
     .timeline-bullets { margin-top: 0.75rem; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
     .timeline-bullets li { font-size: 0.88rem; color: rgba(245,242,235,0.6); line-height: 1.6; padding-left: 1rem; position: relative; }
-    .timeline-bullets li::before { content: "4"; position: absolute; left: 0; color: var(--teal); font-size: 0.75rem; }
+    .timeline-bullets li::before { content: "–"; position: absolute; left: 0; color: var(--teal); font-size: 0.75rem; }
     .portfolio-callout { margin-top: 3.5rem; background: rgba(42,157,143,0.08); border: 1px solid rgba(42,157,143,0.2); border-radius: 4px; padding: 2rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
-    .callout-number { font-family: "DM Serif Display", serif; font-size: 2.25rem; color: var(--teal); line-height: 1; }
-    .callout-label { font-size: 0.82rem; color: rgba(245,242,235,0.55); margin-top: 0.25rem; }
+    .callout-item .stat-value { font-size: 2.25rem; color: var(--teal); }
+    .callout-item .stat-caption { font-size: 0.82rem; color: rgba(245,242,235,0.55); }
 
     #consulting { background: var(--slate); }
     .consulting-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 640px; margin-bottom: 3rem; line-height: 1.75; }
@@ -120,8 +123,8 @@
     .board-sidebar { }
     .board-sidebar img { width: 100%; border-radius: 4px; margin-bottom: 1.5rem; object-fit: cover; max-height: 280px; }
     .board-badge { display: inline-block; background: var(--civic); color: white; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; padding: 0.35rem 0.75rem; border-radius: 2px; margin-bottom: 1.5rem; }
-    .board-stat-large { font-family: "DM Serif Display", serif; font-size: 3rem; color: var(--civic); line-height: 1; margin-bottom: 0.25rem; }
-    .board-stat-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+    .board-stat-large.stat-value { font-size: 3rem; color: var(--civic); margin-bottom: 0.25rem; }
+    .board-stat-sub.stat-caption { font-size: 0.82rem; margin-bottom: 2rem; }
     .board-content p { font-size: 1rem; color: #3a4a5a; line-height: 1.75; margin-bottom: 1.25rem; }
     .board-priorities { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
     .board-priority { padding: 1rem 1.25rem; border-left: 3px solid var(--civic); background: white; }
@@ -225,7 +228,7 @@
     </div>
     <div class="hero-photo-col">
       <div class="hero-photo-frame">
-        <img src="headshot.jpg" alt="Tim Stoub" />
+        <img src="headshot.jpg" alt="Tim Stoub" width="427" height="640" />
       </div>
     </div>
   </div>
@@ -262,20 +265,20 @@
       </div>
       <div class="about-stats">
         <div class="stat-block">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Years in senior living operations</div>
+          <div class="stat-value">15+</div>
+          <div class="stat-caption">Years in senior living operations</div>
         </div>
         <div class="stat-block">
-          <div class="stat-number">11</div>
-          <div class="stat-label">Communities in current Midwest portfolio</div>
+          <div class="stat-value">11</div>
+          <div class="stat-caption">Communities in current Midwest portfolio</div>
         </div>
         <div class="stat-block">
-          <div class="stat-number">25+</div>
-          <div class="stat-label">Years in facilities and construction</div>
+          <div class="stat-value">25+</div>
+          <div class="stat-caption">Years in facilities and construction</div>
         </div>
         <div class="stat-block" style="border-left-color: var(--gold)">
-          <div class="stat-number">Peotone, IL</div>
-          <div class="stat-label">Based in the Chicago southwest suburbs</div>
+          <div class="stat-value">Peotone, IL</div>
+          <div class="stat-caption">Based in the Chicago southwest suburbs</div>
         </div>
       </div>
     </div>
@@ -342,16 +345,16 @@
     </div>
     <div class="portfolio-callout">
       <div class="callout-item">
-        <div class="callout-number">11</div>
-        <div class="callout-label">Communities in current Midwest portfolio</div>
+        <div class="stat-value">11</div>
+        <div class="stat-caption">Communities in current Midwest portfolio</div>
       </div>
       <div class="callout-item">
-        <div class="callout-number">20%</div>
-        <div class="callout-label">Reduction in equipment downtime at Peace Village</div>
+        <div class="stat-value">20%</div>
+        <div class="stat-caption">Reduction in equipment downtime at Peace Village</div>
       </div>
       <div class="callout-item">
-        <div class="callout-number">25 yrs</div>
-        <div class="callout-label">Combined trade and facilities experience</div>
+        <div class="stat-value">25 yrs</div>
+        <div class="stat-caption">Combined trade and facilities experience</div>
       </div>
     </div>
   </div>
@@ -371,7 +374,7 @@
           <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;background:#b8f000;color:#111;padding:2px 6px;border-radius:2px;">FAS V1</span>
         </div>
         <div class="mock-body">
-          <div style="font-size:0.75rem;color:#2A9D8F;font-weight:600;">Survey Setup</div>
+          <div style="font-size:0.75rem;color:var(--teal);font-weight:600;">Survey Setup</div>
           <div style="background:rgba(255,255,255,0.08);height:20px;border-radius:2px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.35);">Select a community...</span></div>
           <div style="display:flex;gap:6px;">
             <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">AL</span></div>
@@ -380,10 +383,10 @@
           </div>
           <div style="display:flex;gap:6px;">
             <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Spot Check &middot; 24</span></div>
-            <div style="flex:1;background:#2A9D8F;height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:#fff;font-weight:600;">Standard &middot; 45</span></div>
+            <div style="flex:1;background:var(--teal);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:#fff;font-weight:600;">Standard &middot; 45</span></div>
             <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Intensive &middot; 63</span></div>
           </div>
-          <div style="background:#2A9D8F;height:24px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:4px;"><span style="font-size:0.65rem;color:#fff;font-weight:600;letter-spacing:0.05em;">Generate Survey</span></div>
+          <div style="background:var(--teal);height:24px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:4px;"><span style="font-size:0.65rem;color:#fff;font-weight:600;letter-spacing:0.05em;">Generate Survey</span></div>
         </div>
       </div>
       <div class="app-body">
@@ -417,13 +420,13 @@
   <div class="section-inner">
     <div class="board-grid">
       <div class="board-sidebar">
-        <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" />
+        <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" width="900" height="663" loading="lazy" />
         <span class="board-badge">Elected Trustee</span>
         <p class="section-eyebrow civic-eye">Peotone CUSD 207-U</p>
         <h2 class="section-title">Public service<br>is a responsibility.</h2>
         <div class="divider civic"></div>
-        <div class="board-stat-large">2021</div>
-        <div class="board-stat-sub">First elected &middot; Re-elected 2025</div>
+        <div class="board-stat-large stat-value">2021</div>
+        <div class="board-stat-sub stat-caption">First elected &middot; Re-elected 2025</div>
       </div>
       <div class="board-content">
         <p>Tim has served on the Peotone CUSD 207-U School Board since 2021, re-elected in 2025, bringing the same discipline he applies to operational management to the governance of a public school district. His focus is grounded in fiscal accountability, transparency, and protecting the long-term health of the district for students and taxpayers alike.</p>
@@ -468,9 +471,9 @@
         </div>
       </div>
       <div class="farm-photos">
-        <div class="farm-photo"><img src="farm1.jpg" alt="Family transplanting on the farm" /></div>
-        <div class="farm-photo"><img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" /></div>
-        <div class="farm-photo"><img src="farm3.jpg" alt="Tim and son on the tractor" /></div>
+        <div class="farm-photo"><img src="farm1.jpg" alt="Family transplanting on the farm" width="700" height="467" loading="lazy" /></div>
+        <div class="farm-photo"><img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" width="700" height="467" loading="lazy" /></div>
+        <div class="farm-photo"><img src="farm3.jpg" alt="Tim and son on the tractor" width="467" height="700" loading="lazy" /></div>
       </div>
     </div>
   </div>
