@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Tim Stoub</title>
   <meta name="description" content="Regional Director of Plant Operations, Stoub Family Farms, and Peotone School Board Trustee." />
   <!-- Favicon & Apple Touch Icon -->
@@ -22,7 +22,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB;
+      --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB; --offwhite-civic: #EDF1F7;
       --teal: #2A9D8F; --gold: #C9A84C; --civic: #4A7CBF;
       --muted: #8A9AAA; --border: #D4CFC6;
     }
@@ -31,9 +31,14 @@
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 60px; background: rgba(26,42,58,0.97); backdrop-filter: blur(8px); }
     .nav-logo { font-family: "IBM Plex Mono", monospace; font-size: 0.85rem; color: var(--teal); letter-spacing: 0.08em; text-decoration: none; }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
     .nav-links a { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,235,0.7); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--offwhite); }
+    .nav-links a.nav-cta { color: var(--navy); background: var(--teal); padding: 0.45rem 0.9rem; border-radius: 2px; transition: background 0.2s; }
+    .nav-links a.nav-cta:hover { color: var(--navy); background: var(--offwhite); }
+    .nav-toggle-input { display: none; }
+    .nav-toggle-btn { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 32px; height: 32px; cursor: pointer; }
+    .nav-toggle-bar { display: block; width: 100%; height: 2px; background: var(--offwhite); transition: transform 0.25s, opacity 0.2s; }
 
     #hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; padding: 0 2.5rem; position: relative; overflow: hidden; }
     .hero-bg-lines { position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent, transparent 119px, rgba(42,157,143,0.04) 119px, rgba(42,157,143,0.04) 120px); pointer-events: none; }
@@ -42,10 +47,14 @@
     .hero-name { font-family: "DM Serif Display", serif; font-size: clamp(3rem,5vw,4.5rem); line-height: 1.05; color: var(--offwhite); margin-bottom: 1.5rem; }
     .role-stack { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
     .role-item { display: flex; align-items: center; gap: 0.75rem; }
+    .role-item.sub { margin-left: 1.35rem; }
+    .role-item.sub .role-dot { width: 6px; height: 6px; }
+    .role-item.sub .role-label { font-size: 0.92rem; color: rgba(245,242,235,0.6); }
     .role-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .role-dot.teal { background: var(--teal); }
     .role-dot.gold { background: var(--gold); }
     .role-dot.civic { background: var(--civic); }
+    .role-dot.muted { background: var(--muted); }
     .role-label { font-size: 1.05rem; color: rgba(245,242,235,0.85); font-weight: 300; }
     .hero-quote { font-family: "DM Serif Display", serif; font-style: italic; font-size: 0.95rem; color: rgba(245,242,235,0.45); line-height: 1.5; border-left: 2px solid var(--teal); padding-left: 1rem; margin-top: 2rem; }
     .hero-quote cite { display: block; font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--teal); margin-top: 0.5rem; }
@@ -81,7 +90,8 @@
     .stat-caption { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
     .stat-block .stat-value { font-size: 2.5rem; color: var(--navy); }
 
-    #experience { background: var(--navy); }
+    #experience { background: linear-gradient(180deg, var(--navy) 0%, #16212B 100%); position: relative; overflow: hidden; }
+    .experience-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(42,157,143,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(42,157,143,0.06) 1px, transparent 1px); background-size: 36px 36px; pointer-events: none; }
     .exp-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 620px; margin-bottom: 3rem; line-height: 1.75; }
     .timeline { position: relative; padding-left: 2rem; }
     .timeline::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--teal), rgba(42,157,143,0.1)); }
@@ -100,7 +110,7 @@
     .callout-item .stat-value { font-size: 2.25rem; color: var(--teal); }
     .callout-item .stat-caption { font-size: 0.82rem; color: rgba(245,242,235,0.55); }
 
-    #consulting { background: var(--slate); }
+    #consulting { background: linear-gradient(155deg, #153331 0%, var(--slate) 100%); }
     .consulting-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 640px; margin-bottom: 3rem; line-height: 1.75; }
     .app-card { background: rgba(26,42,58,0.6); border: 1px solid rgba(42,157,143,0.15); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; max-width: 680px; }
     .app-card:hover { border-color: rgba(42,157,143,0.4); transform: translateY(-3px); }
@@ -109,16 +119,39 @@
     .app-title { font-family: "DM Serif Display", serif; font-size: 1.2rem; color: var(--offwhite); margin-bottom: 0.6rem; }
     .app-desc { font-size: 0.85rem; color: rgba(245,242,235,0.6); line-height: 1.65; }
     .app-screenshot-mockup { width: 100%; background: #1e3a4a; padding: 0; display: flex; flex-direction: column; }
-    .app-screenshot-mockup .mock-header { background: #1a5c6e; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .app-screenshot-mockup .mock-header { background: #1a5c6e; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
     .app-screenshot-mockup .mock-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .mock-header-label { font-family: "IBM Plex Mono", monospace; font-size: 0.6rem; color: #8de; letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mock-header-badge { flex-shrink: 0; font-family: "IBM Plex Mono", monospace; font-size: 0.55rem; background: #b8f000; color: #111; padding: 2px 6px; border-radius: 2px; }
+    .mock-section-label { font-size: 0.75rem; color: var(--teal); font-weight: 600; }
+    .mock-select { background: rgba(255,255,255,0.08); height: 20px; border-radius: 2px; display: flex; align-items: center; padding: 0 8px; }
+    .mock-select span { font-size: 0.6rem; color: rgba(255,255,255,0.35); }
+    .mock-row { display: flex; gap: 6px; }
+    .mock-chip { flex: 1; min-width: 0; border: 1px solid rgba(255,255,255,0.2); height: 22px; border-radius: 2px; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+    .mock-chip span { font-size: 0.6rem; color: rgba(255,255,255,0.6); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mock-chip.muted { border-color: rgba(255,255,255,0.15); }
+    .mock-chip.muted span { font-size: 0.55rem; color: rgba(255,255,255,0.4); font-weight: 400; }
+    .mock-chip.active { border: none; background: var(--teal); }
+    .mock-chip.active span { font-size: 0.55rem; color: #fff; }
+    .mock-generate-btn { background: var(--teal); height: 24px; border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-top: 4px; }
+    .mock-generate-btn span { font-size: 0.65rem; color: #fff; font-weight: 600; letter-spacing: 0.05em; }
     .consulting-services { margin-top: 3rem; }
     .services-title { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.5rem; }
     .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
     .service-item { padding: 1.25rem 1.5rem; background: rgba(26,42,58,0.5); border-left: 2px solid var(--teal); }
     .service-name { font-size: 0.9rem; color: var(--offwhite); font-weight: 500; margin-bottom: 0.35rem; }
     .service-desc { font-size: 0.8rem; color: rgba(245,242,235,0.5); line-height: 1.6; }
+    .testimonials { margin-top: 3.5rem; }
+    .testimonial-feature-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 2.5rem; align-items: start; }
+    .testimonial-featured { border-left: 2px solid var(--teal); padding-left: 1.75rem; }
+    .testimonial-featured-quote { font-family: "DM Serif Display", serif; font-style: italic; font-size: 1.3rem; line-height: 1.5; color: rgba(245,242,235,0.9); margin-bottom: 1rem; }
+    .testimonial-supporting { display: flex; flex-direction: column; gap: 1.75rem; }
+    .testimonial-minor-quote { font-family: "DM Serif Display", serif; font-style: italic; font-size: 0.9rem; line-height: 1.55; color: rgba(245,242,235,0.65); margin-bottom: 0.6rem; }
+    .testimonial-attribution { display: block; font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal); }
+    .consulting-contact { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(245,242,235,0.12); max-width: 640px; }
+    .consulting-contact .contact-links { justify-content: flex-start; }
 
-    #board { background: var(--offwhite); }
+    #board { background: var(--offwhite-civic); }
     .board-grid { display: grid; grid-template-columns: 2fr 3fr; gap: 4rem; align-items: start; }
     .board-sidebar { }
     .board-sidebar img { width: 100%; border-radius: 4px; margin-bottom: 1.5rem; object-fit: cover; max-height: 280px; }
@@ -144,27 +177,50 @@
     .farm-photo:first-child { grid-row: span 2; }
     .farm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    #contact { background: var(--navy); text-align: center; }
-    .contact-inner { max-width: 640px; margin: 0 auto; }
-    .contact-lead { font-size: 1.1rem; color: rgba(245,242,235,0.65); line-height: 1.75; margin-bottom: 2.5rem; }
-    .contact-email { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--teal); text-decoration: none; display: block; margin-bottom: 2rem; transition: color 0.2s; }
+    .contact-lead { font-size: 1.05rem; color: rgba(245,242,235,0.7); line-height: 1.75; max-width: 620px; margin: 0.75rem 0 1.75rem; }
+    .contact-email { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--teal); text-decoration: none; display: block; margin-bottom: 1.5rem; transition: color 0.2s; }
     .contact-email:hover { color: var(--offwhite); }
-    .contact-links { display: flex; justify-content: center; gap: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
     .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
     .contact-link:hover { color: var(--offwhite); border-bottom-color: var(--teal); }
+
+    #closing { background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 55%, #2A1F0E 100%); text-align: center; }
+    .closing-inner { max-width: 640px; margin: 0 auto; }
+    .closing-signature { display: flex; justify-content: center; gap: 1.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .closing-role { display: inline-flex; align-items: center; gap: 0.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,242,235,0.7); }
+    .closing-title { margin-bottom: 1rem; }
 
     footer { background: #111D27; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-mono { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(138,154,170,0.5); }
 
+    .back-to-top { position: fixed; bottom: calc(2rem + env(safe-area-inset-bottom)); right: calc(2rem + env(safe-area-inset-right)); z-index: 90; width: 42px; height: 42px; border-radius: 50%; background: rgba(26,42,58,0.9); border: 1px solid rgba(42,157,143,0.35); color: var(--teal); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; line-height: 1; transition: background 0.2s, transform 0.2s, color 0.2s; backdrop-filter: blur(4px); }
+    .back-to-top:hover { background: var(--teal); color: var(--navy); transform: translateY(-3px); }
+
     @media (max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-col { display: none; }
+      .hero-photo-col { margin-top: 2rem; }
+      .hero-photo-frame { width: 180px; height: 210px; margin: 0 auto; }
       .about-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr 1fr; }
+      .testimonial-feature-grid { grid-template-columns: 1fr; }
       .farm-grid { grid-template-columns: 1fr; }
       .board-grid { grid-template-columns: 1fr; }
       .portfolio-callout { grid-template-columns: 1fr; gap: 1.5rem; }
-      .nav-links { display: none; }
+      .nav-toggle-btn { display: flex; }
+      .nav-links {
+        position: fixed; top: 60px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(26,42,58,0.98); backdrop-filter: blur(8px);
+        max-height: 0; overflow: hidden; padding: 0 2.5rem;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+      .nav-toggle-input:checked ~ .nav-links { max-height: 400px; padding: 0.5rem 2.5rem 1.5rem; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 0.9rem 0; border-bottom: 1px solid rgba(245,242,235,0.1); }
+      .nav-links a.nav-cta { display: inline-block; margin-top: 0.85rem; text-align: center; border-bottom: none; }
+      .nav-toggle-input:checked ~ .nav-toggle-btn .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-toggle-input:checked ~ .nav-toggle-btn .nav-toggle-bar:nth-child(2) { opacity: 0; }
+      .nav-toggle-input:checked ~ .nav-toggle-btn .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
       .farm-photos { display: grid; grid-template-columns: 1fr; grid-template-rows: auto; height: auto; gap: 0.75rem; }
       .farm-photo:first-child { grid-row: auto; }
       .farm-photo { height: 240px; }
@@ -175,6 +231,10 @@
       .services-grid { grid-template-columns: 1fr; }
       .hero-scroll { display: none; }
       .board-sidebar .section-eyebrow { white-space: nowrap; }
+      .mock-chip { padding: 0 2px; }
+      .mock-chip span { font-size: 0.52rem; }
+      .mock-chip.muted span { font-size: 0.48rem; }
+      .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); right: calc(1.25rem + env(safe-area-inset-right)); width: 38px; height: 38px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .scroll-line, .timeline-item.current::before { animation: none; }
@@ -186,13 +246,19 @@
 
 <nav>
   <a href="#hero" class="nav-logo">tstoub.com</a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle menu">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </label>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#consulting">Consulting</a></li>
     <li><a href="#board">Board</a></li>
     <li><a href="#farm">Farm</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
 </nav>
 
@@ -209,16 +275,20 @@
           <span class="role-label">Regional Director of Plant Operations, Franciscan Ministries</span>
         </div>
         <div class="role-item">
+          <span class="role-dot teal"></span>
+          <span class="role-label">Available for Consulting</span>
+        </div>
+        <div class="role-item">
+          <span class="role-dot muted"></span>
+          <span class="role-label">Personal</span>
+        </div>
+        <div class="role-item sub">
           <span class="role-dot gold"></span>
           <span class="role-label">Owner, Stoub Family Farms LLC</span>
         </div>
-        <div class="role-item">
+        <div class="role-item sub">
           <span class="role-dot civic"></span>
           <span class="role-label">Elected Trustee, Peotone CUSD 207-U</span>
-        </div>
-        <div class="role-item">
-          <span class="role-dot teal"></span>
-          <span class="role-label">Consultant </span>
         </div>
       </div>
       <blockquote class="hero-quote">
@@ -276,10 +346,6 @@
           <div class="stat-value">25+</div>
           <div class="stat-caption">Years in facilities and construction</div>
         </div>
-        <div class="stat-block" style="border-left-color: var(--gold)">
-          <div class="stat-value">Peotone, IL</div>
-          <div class="stat-caption">Based in the Chicago southwest suburbs</div>
-        </div>
       </div>
     </div>
   </div>
@@ -287,7 +353,8 @@
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-inner">
+  <div class="experience-bg"></div>
+  <div class="section-inner" style="position:relative;z-index:1;">
     <p class="section-eyebrow">Career</p>
     <h2 class="section-title light">Where the work happened.</h2>
     <div class="divider"></div>
@@ -370,23 +437,23 @@
     <div class="app-card">
       <div class="app-screenshot-mockup">
         <div class="mock-header">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:#8de;letter-spacing:0.08em;">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;background:#b8f000;color:#111;padding:2px 6px;border-radius:2px;">FAS V1</span>
+          <span class="mock-header-label">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
+          <span class="mock-header-badge">FAS V1</span>
         </div>
         <div class="mock-body">
-          <div style="font-size:0.75rem;color:var(--teal);font-weight:600;">Survey Setup</div>
-          <div style="background:rgba(255,255,255,0.08);height:20px;border-radius:2px;display:flex;align-items:center;padding:0 8px;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.35);">Select a community...</span></div>
-          <div style="display:flex;gap:6px;">
-            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">AL</span></div>
-            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">MC</span></div>
-            <div style="flex:1;border:1px solid rgba(255,255,255,0.2);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.6rem;color:rgba(255,255,255,0.6);font-weight:600;">SNF</span></div>
+          <div class="mock-section-label">Survey Setup</div>
+          <div class="mock-select"><span>Select a community...</span></div>
+          <div class="mock-row">
+            <div class="mock-chip"><span>AL</span></div>
+            <div class="mock-chip"><span>MC</span></div>
+            <div class="mock-chip"><span>SNF</span></div>
           </div>
-          <div style="display:flex;gap:6px;">
-            <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Spot Check &middot; 24</span></div>
-            <div style="flex:1;background:var(--teal);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:#fff;font-weight:600;">Standard &middot; 45</span></div>
-            <div style="flex:1;border:1px solid rgba(255,255,255,0.15);height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;"><span style="font-size:0.55rem;color:rgba(255,255,255,0.4);">Intensive &middot; 63</span></div>
+          <div class="mock-row">
+            <div class="mock-chip muted"><span>Spot Check &middot; 24</span></div>
+            <div class="mock-chip active"><span>Standard &middot; 45</span></div>
+            <div class="mock-chip muted"><span>Intensive &middot; 63</span></div>
           </div>
-          <div style="background:var(--teal);height:24px;border-radius:2px;display:flex;align-items:center;justify-content:center;margin-top:4px;"><span style="font-size:0.65rem;color:#fff;font-weight:600;letter-spacing:0.05em;">Generate Survey</span></div>
+          <div class="mock-generate-btn"><span>Generate Survey</span></div>
         </div>
       </div>
       <div class="app-body">
@@ -410,6 +477,33 @@
           <div class="service-name">Plant Operations Buildout</div>
           <div class="service-desc">Department structure, CMMS setup, preventive maintenance scheduling, and policy development for growing portfolios.</div>
         </div>
+      </div>
+    </div>
+    <div class="testimonials">
+      <p class="services-title">What People Are Saying</p>
+      <div class="testimonial-feature-grid">
+        <blockquote class="testimonial-featured">
+          <p class="testimonial-featured-quote">&ldquo;Tim is one of the people in my many years of working as a healthcare executive and leadership consultant that stands out as one of the best. He is a rare find.&rdquo;</p>
+          <cite class="testimonial-attribution">Linda &middot; Healthcare Executive &amp; Leadership Consultant</cite>
+        </blockquote>
+        <div class="testimonial-supporting">
+          <blockquote class="testimonial-minor">
+            <p class="testimonial-minor-quote">&ldquo;Tim is an outstanding leader. The term &lsquo;think outside the box&rsquo; does not even begin to describe Tim. He is a master of change management.&rdquo;</p>
+            <cite class="testimonial-attribution">Joan &middot; Corporate Senior Director of Human Resources</cite>
+          </blockquote>
+          <blockquote class="testimonial-minor">
+            <p class="testimonial-minor-quote">&ldquo;It has been his ability to create safety and trust with me as a contractor that has fueled my team&rsquo;s efficiency, passion and overall respect for working with his organization.&rdquo;</p>
+            <cite class="testimonial-attribution">Wayne &middot; Owner, Commercial Contracting &amp; Painting Company</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="consulting-contact" id="contact">
+      <p class="services-title">Get in Touch</p>
+      <p class="contact-lead">Exploring consulting services, building out plant operations at a senior living organization, or looking for real operational tools? Tim is happy to have the conversation.</p>
+      <a href="mailto:info@tstoub.com" class="contact-email">info@tstoub.com</a>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/tim-stoub-38057329/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </div>
@@ -479,15 +573,18 @@
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <p class="section-eyebrow" style="text-align:center;color:var(--teal);margin-bottom:1.5rem;">Get in Touch</p>
-    <h2 class="section-title light" style="text-align:center;margin-bottom:1rem;">Let's talk operations.</h2>
-    <div class="divider" style="margin:0 auto 2rem;"></div>
-    <p class="contact-lead">Whether you are exploring consulting services, building out plant operations at a senior living organization, or looking for real operational tools &mdash; Tim is happy to have the conversation.</p>
-    <a href="mailto:info@tstoub.com" class="contact-email">info@tstoub.com</a>
+<!-- CLOSING -->
+<section id="closing">
+  <div class="section-inner closing-inner">
+    <div class="closing-signature">
+      <span class="closing-role"><span class="role-dot teal"></span>Operator</span>
+      <span class="closing-role"><span class="role-dot gold"></span>Farmer</span>
+      <span class="closing-role"><span class="role-dot civic"></span>Trustee</span>
+    </div>
+    <h2 class="section-title light closing-title">Different hats.<br>Same standard.</h2>
+    <p class="contact-lead" style="margin-left:auto;margin-right:auto;">Whether it's a senior living campus, a strawberry field, or a school board meeting &mdash; Tim brings the same discipline: show up, do the work, and leave it better than he found it.</p>
     <div class="contact-links">
+      <a href="mailto:info@tstoub.com" class="contact-link">Email</a>
       <a href="https://www.linkedin.com/in/tim-stoub-38057329/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://www.facebook.com/stoubfamilyfarms" class="contact-link" target="_blank" rel="noopener">Farm Facebook</a>
     </div>
@@ -499,6 +596,16 @@
   <span class="footer-mono">tstoub.com</span>
   <span class="footer-mono">Tim Stoub &middot; Peotone, IL &middot; &copy; 2026</span>
 </footer>
+
+<a href="#hero" class="back-to-top" aria-label="Back to top">&uarr;</a>
+
+<script>
+  document.querySelectorAll('.nav-links a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      document.getElementById('nav-toggle').checked = false;
+    });
+  });
+</script>
 
 </body>
 </html>
