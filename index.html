@@ -5,22 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Tim Stoub</title>
   <meta name="description" content="Regional Director of Plant Operations, Stoub Family Farms, and Peotone School Board Trustee." />
-  <!-- Favicon & Apple Touch Icon -->
+  <link rel="canonical" href="https://tstoub.com/" />
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#4A7CBF" />
   <!-- Open Graph / Link Preview -->
   <meta property="og:title" content="Tim Stoub" />
   <meta property="og:description" content="Regional Director of Plant Operations, Stoub Family Farms, and Peotone School Board Trustee." />
-  <meta property="og:image" content="https://tstoub.com/apple-touch-icon.png" />
+  <meta property="og:image" content="https://tstoub.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://tstoub.com" />
   <meta property="og:type" content="website" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tim Stoub" />
+  <meta name="twitter:description" content="Regional Director of Plant Operations, Stoub Family Farms, and Peotone School Board Trustee." />
+  <meta name="twitter:image" content="https://tstoub.com/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="headshot.jpg" fetchpriority="high" />
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tim Stoub",
+    "url": "https://tstoub.com",
+    "image": "https://tstoub.com/headshot.jpg",
+    "jobTitle": "Regional Director of Plant Operations",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Franciscan Ministries"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Peotone",
+      "addressRegion": "IL",
+      "addressCountry": "US"
+    },
+    "email": "mailto:info@tstoub.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/tim-stoub-38057329/",
+      "https://www.facebook.com/stoubfamilyfarms"
+    ]
+  }
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    picture { display: block; width: 100%; height: 100%; }
     :root {
       --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB; --offwhite-civic: #EDF1F7;
       --teal: #2A9D8F; --gold: #C9A84C; --civic: #4A7CBF;
@@ -140,7 +180,7 @@
     .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
     .service-item { padding: 1.25rem 1.5rem; background: rgba(26,42,58,0.5); border-left: 2px solid var(--teal); }
     .service-name { font-size: 0.9rem; color: var(--offwhite); font-weight: 500; margin-bottom: 0.35rem; }
-    .service-desc { font-size: 0.8rem; color: rgba(245,242,235,0.5); line-height: 1.6; }
+    .service-desc { font-size: 0.8rem; color: rgba(245,242,235,0.62); line-height: 1.6; }
     .testimonials { margin-top: 3.5rem; }
     .testimonial-feature-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 2.5rem; align-items: start; }
     .testimonial-featured { border-left: 2px solid var(--teal); padding-left: 1.75rem; }
@@ -181,7 +221,7 @@
     .contact-email { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--teal); text-decoration: none; display: block; margin-bottom: 1.5rem; transition: color 0.2s; }
     .contact-email:hover { color: var(--offwhite); }
     .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #AAB4BE; text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
     .contact-link:hover { color: var(--offwhite); border-bottom-color: var(--teal); }
 
     #closing { background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 55%, #2A1F0E 100%); text-align: center; }
@@ -191,7 +231,7 @@
     .closing-title { margin-bottom: 1rem; }
 
     footer { background: #111D27; padding: 1.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
-    .footer-mono { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(138,154,170,0.5); }
+    .footer-mono { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(138,154,170,0.85); }
 
     .back-to-top { position: fixed; bottom: calc(2rem + env(safe-area-inset-bottom)); right: calc(2rem + env(safe-area-inset-right)); z-index: 90; width: 42px; height: 42px; border-radius: 50%; background: rgba(26,42,58,0.9); border: 1px solid rgba(42,157,143,0.35); color: var(--teal); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1rem; line-height: 1; transition: background 0.2s, transform 0.2s, color 0.2s; backdrop-filter: blur(4px); }
     .back-to-top:hover { background: var(--teal); color: var(--navy); transform: translateY(-3px); }
@@ -240,19 +280,24 @@
       .scroll-line, .timeline-item.current::before { animation: none; }
       html { scroll-behavior: auto; }
     }
+
+    .skip-link { position: absolute; top: -48px; left: 1rem; z-index: 200; background: var(--teal); color: var(--navy); font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; padding: 0.6rem 1rem; border-radius: 2px; text-decoration: none; transition: top 0.2s; }
+    .skip-link:focus { top: 1rem; }
   </style>
 </head>
 <body>
 
+<a href="#hero" class="skip-link">Skip to content</a>
+
 <nav>
   <a href="#hero" class="nav-logo">tstoub.com</a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
-  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle menu">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links-list">
     <span class="nav-toggle-bar"></span>
     <span class="nav-toggle-bar"></span>
     <span class="nav-toggle-bar"></span>
   </label>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links-list">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#consulting">Consulting</a></li>
@@ -263,7 +308,7 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero">
+<section id="hero" tabindex="-1">
   <div class="hero-bg-lines"></div>
   <div class="hero-inner">
     <div class="hero-text">
@@ -298,7 +343,10 @@
     </div>
     <div class="hero-photo-col">
       <div class="hero-photo-frame">
-        <img src="headshot.jpg" alt="Tim Stoub" width="427" height="640" />
+        <picture>
+          <source srcset="headshot.webp" type="image/webp" />
+          <img src="headshot.jpg" alt="Tim Stoub" width="427" height="640" fetchpriority="high" />
+        </picture>
       </div>
     </div>
   </div>
@@ -514,7 +562,10 @@
   <div class="section-inner">
     <div class="board-grid">
       <div class="board-sidebar">
-        <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" width="900" height="663" loading="lazy" />
+        <picture>
+          <source srcset="board.webp" type="image/webp" />
+          <img src="board.jpg" alt="Tim Stoub speaking at Peotone school board meeting" width="900" height="663" loading="lazy" />
+        </picture>
         <span class="board-badge">Elected Trustee</span>
         <p class="section-eyebrow civic-eye">Peotone CUSD 207-U</p>
         <h2 class="section-title">Public service<br>is a responsibility.</h2>
@@ -565,9 +616,9 @@
         </div>
       </div>
       <div class="farm-photos">
-        <div class="farm-photo"><img src="farm1.jpg" alt="Family transplanting on the farm" width="700" height="467" loading="lazy" /></div>
-        <div class="farm-photo"><img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" width="700" height="467" loading="lazy" /></div>
-        <div class="farm-photo"><img src="farm3.jpg" alt="Tim and son on the tractor" width="467" height="700" loading="lazy" /></div>
+        <div class="farm-photo"><picture><source srcset="farm1.webp" type="image/webp" /><img src="farm1.jpg" alt="Family transplanting on the farm" width="700" height="467" loading="lazy" /></picture></div>
+        <div class="farm-photo"><picture><source srcset="farm2.webp" type="image/webp" /><img src="farm2.jpg" alt="Strawberries growing at Stoub Family Farms" width="700" height="467" loading="lazy" /></picture></div>
+        <div class="farm-photo"><picture><source srcset="farm3.webp" type="image/webp" /><img src="farm3.jpg" alt="Tim and son on the tractor" width="467" height="700" loading="lazy" /></picture></div>
       </div>
     </div>
   </div>
@@ -594,17 +645,24 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-mono">tstoub.com</span>
-  <span class="footer-mono">Tim Stoub &middot; Peotone, IL &middot; &copy; 2026</span>
+  <span class="footer-mono">Tim Stoub &middot; Peotone, IL &middot; &copy; <span id="footer-year">2026</span></span>
 </footer>
 
 <a href="#hero" class="back-to-top" aria-label="Back to top">&uarr;</a>
 
 <script>
+  var navToggle = document.getElementById('nav-toggle');
+  var navToggleBtn = document.querySelector('.nav-toggle-btn');
   document.querySelectorAll('.nav-links a').forEach(function (link) {
     link.addEventListener('click', function () {
-      document.getElementById('nav-toggle').checked = false;
+      navToggle.checked = false;
+      navToggleBtn.setAttribute('aria-expanded', 'false');
     });
   });
+  navToggle.addEventListener('change', function () {
+    navToggleBtn.setAttribute('aria-expanded', navToggle.checked ? 'true' : 'false');
+  });
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
 
 </body>
