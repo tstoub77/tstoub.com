@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="headshot.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="headshot.webp" type="image/webp" fetchpriority="high" />
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -64,7 +64,7 @@
     :root {
       --navy: #1A2A3A; --slate: #2E4057; --offwhite: #F5F2EB; --offwhite-civic: #EDF1F7;
       --teal: #2A9D8F; --gold: #C9A84C; --civic: #4A7CBF;
-      --muted: #8A9AAA; --border: #D4CFC6;
+      --muted: #8A9AAA; --muted-light: #AAB4BE; --border: #D4CFC6;
     }
     html { scroll-behavior: smooth; }
     body { font-family: "Inter", sans-serif; background: var(--offwhite); color: var(--navy); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
@@ -221,7 +221,7 @@
     .contact-email { font-family: "DM Serif Display", serif; font-size: 1.75rem; color: var(--teal); text-decoration: none; display: block; margin-bottom: 1.5rem; transition: color 0.2s; }
     .contact-email:hover { color: var(--offwhite); }
     .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #AAB4BE; text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+    .contact-link { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-light); text-decoration: none; transition: color 0.2s; border-bottom: 1px solid transparent; padding-bottom: 2px; }
     .contact-link:hover { color: var(--offwhite); border-bottom-color: var(--teal); }
 
     #closing { background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 55%, #2A1F0E 100%); text-align: center; }
@@ -292,7 +292,7 @@
 <nav>
   <a href="#hero" class="nav-logo">tstoub.com</a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
-  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links-list">
+  <label for="nav-toggle" class="nav-toggle-btn" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links-list">
     <span class="nav-toggle-bar"></span>
     <span class="nav-toggle-bar"></span>
     <span class="nav-toggle-bar"></span>
@@ -661,6 +661,13 @@
   });
   navToggle.addEventListener('change', function () {
     navToggleBtn.setAttribute('aria-expanded', navToggle.checked ? 'true' : 'false');
+  });
+  navToggleBtn.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navToggle.checked = !navToggle.checked;
+      navToggle.dispatchEvent(new Event('change'));
+    }
   });
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 </script>
