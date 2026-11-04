@@ -152,29 +152,21 @@
 
     #consulting { background: linear-gradient(155deg, #153331 0%, var(--slate) 100%); }
     .consulting-intro { font-size: 1.05rem; color: rgba(245,242,235,0.7); max-width: 640px; margin-bottom: 3rem; line-height: 1.75; }
-    .app-card { background: rgba(26,42,58,0.6); border: 1px solid rgba(42,157,143,0.15); border-radius: 4px; overflow: hidden; transition: border-color 0.25s, transform 0.25s; max-width: 680px; }
-    .app-card:hover { border-color: rgba(42,157,143,0.4); transform: translateY(-3px); }
-    .app-body { padding: 1.5rem; }
+    .app-card { background: rgba(26,42,58,0.6); border: 1px solid rgba(42,157,143,0.15); border-radius: 4px; overflow: hidden; }
+    .app-body { padding: 1.75rem 2rem 2rem; }
     .app-badge { font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
-    .app-title { font-family: "DM Serif Display", serif; font-size: 1.2rem; color: var(--offwhite); margin-bottom: 0.6rem; }
-    .app-desc { font-size: 0.85rem; color: rgba(245,242,235,0.6); line-height: 1.65; }
-    .app-screenshot-mockup { width: 100%; background: #1e3a4a; padding: 0; display: flex; flex-direction: column; }
-    .app-screenshot-mockup .mock-header { background: #1a5c6e; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-    .app-screenshot-mockup .mock-body { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
-    .mock-header-label { font-family: "IBM Plex Mono", monospace; font-size: 0.6rem; color: #8de; letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mock-header-badge { flex-shrink: 0; font-family: "IBM Plex Mono", monospace; font-size: 0.55rem; background: #b8f000; color: #111; padding: 2px 6px; border-radius: 2px; }
-    .mock-section-label { font-size: 0.75rem; color: var(--teal); font-weight: 600; }
-    .mock-select { background: rgba(255,255,255,0.08); height: 20px; border-radius: 2px; display: flex; align-items: center; padding: 0 8px; }
-    .mock-select span { font-size: 0.6rem; color: rgba(255,255,255,0.35); }
-    .mock-row { display: flex; gap: 6px; }
-    .mock-chip { flex: 1; min-width: 0; border: 1px solid rgba(255,255,255,0.2); height: 22px; border-radius: 2px; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
-    .mock-chip span { font-size: 0.6rem; color: rgba(255,255,255,0.6); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mock-chip.muted { border-color: rgba(255,255,255,0.15); }
-    .mock-chip.muted span { font-size: 0.55rem; color: rgba(255,255,255,0.4); font-weight: 400; }
-    .mock-chip.active { border: none; background: var(--teal); }
-    .mock-chip.active span { font-size: 0.55rem; color: #fff; }
-    .mock-generate-btn { background: var(--teal); height: 24px; border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-top: 4px; }
-    .mock-generate-btn span { font-size: 0.65rem; color: #fff; font-weight: 600; letter-spacing: 0.05em; }
+    .app-title { font-family: "DM Serif Display", serif; font-size: 1.45rem; color: var(--offwhite); margin-bottom: 0.6rem; }
+    .app-desc { font-size: 0.92rem; color: rgba(245,242,235,0.68); line-height: 1.7; max-width: 760px; }
+    .app-features { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; list-style: none; }
+    .app-features li { font-family: "IBM Plex Mono", monospace; font-size: 0.66rem; letter-spacing: 0.05em; color: rgba(245,242,235,0.78); border: 1px solid rgba(42,157,143,0.35); border-radius: 2px; padding: 0.3rem 0.65rem; }
+    /* Light stage so each organization's brand colors read true. */
+    .app-showcase { background: #E6EAEE; padding: 2rem 2rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+    .app-shot { margin: 0; }
+    .app-shot-frame { border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(17,29,39,0.12), 0 10px 28px rgba(17,29,39,0.18); background: #F1F3F5; }
+    .app-shot-frame picture, .app-shot-frame img { display: block; width: 100%; height: auto; }
+    .app-shot figcaption { margin-top: 0.85rem; display: flex; align-items: center; gap: 0.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: #3A4A5A; }
+    .app-shot-swatch { display: inline-flex; gap: 3px; }
+    .app-shot-swatch i { width: 10px; height: 10px; border-radius: 2px; display: block; }
     .consulting-services { margin-top: 3rem; }
     .services-title { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.5rem; }
     .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
@@ -271,9 +263,8 @@
       .services-grid { grid-template-columns: 1fr; }
       .hero-scroll { display: none; }
       .board-sidebar .section-eyebrow { white-space: nowrap; }
-      .mock-chip { padding: 0 2px; }
-      .mock-chip span { font-size: 0.52rem; }
-      .mock-chip.muted span { font-size: 0.48rem; }
+      .app-showcase { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.5rem; }
+      .app-body { padding: 1.5rem 1.25rem; }
       .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); right: calc(1.25rem + env(safe-area-inset-right)); width: 38px; height: 38px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -483,31 +474,37 @@
     <div class="divider"></div>
     <p class="consulting-intro">Tim builds web-based tools purpose-built for senior living plant operations &mdash; not generic software adapted for the industry, but applications designed from direct field experience. Available for custom development through private consulting.</p>
     <div class="app-card">
-      <div class="app-screenshot-mockup">
-        <div class="mock-header">
-          <span class="mock-header-label">FRANCISCAN ADVISORY SERVICES | PLANT OPERATIONS</span>
-          <span class="mock-header-badge">FAS V1</span>
-        </div>
-        <div class="mock-body">
-          <div class="mock-section-label">Survey Setup</div>
-          <div class="mock-select"><span>Select a community...</span></div>
-          <div class="mock-row">
-            <div class="mock-chip"><span>AL</span></div>
-            <div class="mock-chip"><span>MC</span></div>
-            <div class="mock-chip"><span>SNF</span></div>
+      <div class="app-showcase">
+        <figure class="app-shot">
+          <div class="app-shot-frame">
+            <picture>
+              <source srcset="mock-survey-fm.webp" type="image/webp" />
+              <img src="mock-survey-fm.jpg" alt="Mock Life Safety Survey branded for Franciscan Ministries: indigo header with the Franciscan Ministries logo, Illinois rules, and a failed item marked Immediate with notes" width="1040" height="1382" loading="lazy" />
+            </picture>
           </div>
-          <div class="mock-row">
-            <div class="mock-chip muted"><span>Spot Check &middot; 24</span></div>
-            <div class="mock-chip active"><span>Standard &middot; 45</span></div>
-            <div class="mock-chip muted"><span>Intensive &middot; 63</span></div>
+          <figcaption><span class="app-shot-swatch" aria-hidden="true"><i style="background:#161E69"></i><i style="background:#E79023"></i></span>Franciscan Ministries</figcaption>
+        </figure>
+        <figure class="app-shot">
+          <div class="app-shot-frame">
+            <picture>
+              <source srcset="mock-survey-fas.webp" type="image/webp" />
+              <img src="mock-survey-fas.jpg" alt="The same survey tool branded for Franciscan Advisory Services: deep blue header with the FAS logo, teal and lime accents, and Indiana rules" width="1040" height="1382" loading="lazy" />
+            </picture>
           </div>
-          <div class="mock-generate-btn"><span>Generate Survey</span></div>
-        </div>
+          <figcaption><span class="app-shot-swatch" aria-hidden="true"><i style="background:#074975"></i><i style="background:#36C1CB"></i><i style="background:#94C83E"></i></span>Franciscan Advisory Services</figcaption>
+        </figure>
       </div>
       <div class="app-body">
-        <div class="app-badge">Plant Operations &middot; FAS V1</div>
+        <div class="app-badge">Plant Operations &middot; v2.0 &middot; One codebase, any brand</div>
         <div class="app-title">Mock Life Safety Survey</div>
-        <div class="app-desc">Configurable survey preparation tool for senior living communities. Set community, care levels (AL, MC, SNF), surveyor, date, and intensity from Spot Check (24 items) through Intensive (63 items). Generates a ready-to-use survey set for staff readiness training ahead of state inspections.</div>
+        <div class="app-desc">A survey-readiness tool for senior living communities, built once and branded per organization &mdash; each site carries its own logo, colors, and community list. Skilled nursing is surveyed against the CMS K-tags and E-tags; assisted living and memory care against the selected state&rsquo;s rules. Findings print as a full report or a mock CMS-2567 with a plan-of-correction column.</div>
+        <ul class="app-features">
+          <li>CMS K-tags &amp; E-tags</li>
+          <li>IL &middot; IN &middot; OH state rules</li>
+          <li>Mock 2567 printout</li>
+          <li>Save &amp; resume across devices</li>
+          <li>Per-organization branding</li>
+        </ul>
       </div>
     </div>
     <div class="consulting-services">
