@@ -162,8 +162,13 @@
     .app-features { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; list-style: none; }
     .app-features li { font-family: "IBM Plex Mono", monospace; font-size: 0.66rem; letter-spacing: 0.05em; color: rgba(245,242,235,0.78); border: 1px solid rgba(54,179,164,0.35); border-radius: 2px; padding: 0.3rem 0.65rem; }
     /* Light stage so each organization's brand colors read true. */
-    .app-showcase { background: #E6EAEE; padding: 2rem 2rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
-    .app-shot { margin: 0; }
+    .app-showcase { background: #E6EAEE; padding: 2rem 2rem 1.5rem; }
+    .app-shot { max-width: 400px; margin: 0 auto; }
+    @media (min-width: 861px) {
+      .app-card { display: grid; grid-template-columns: minmax(0, 440px) 1fr; }
+      .app-showcase { display: flex; align-items: center; }
+      .app-body { align-self: center; padding: 2rem 2.5rem; }
+    }
     .app-shot-frame { border-radius: 6px; overflow: hidden; box-shadow: 0 1px 2px rgba(17,29,39,0.12), 0 10px 28px rgba(17,29,39,0.18); background: #F1F3F5; }
     .app-shot-frame picture, .app-shot-frame img { display: block; width: 100%; height: auto; }
     .app-shot figcaption { margin-top: 0.85rem; display: flex; align-items: center; gap: 0.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: #3A4A5A; }
@@ -265,7 +270,7 @@
       .services-grid { grid-template-columns: 1fr; }
       .hero-scroll { display: none; }
       .board-sidebar .section-eyebrow { white-space: nowrap; }
-      .app-showcase { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.5rem; }
+      .app-showcase { padding: 1.25rem; }
       .app-body { padding: 1.5rem 1.25rem; }
       .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); right: calc(1.25rem + env(safe-area-inset-right)); width: 38px; height: 38px; }
     }
@@ -477,15 +482,6 @@
     <p class="consulting-intro">Tim builds web-based tools purpose-built for senior living plant operations &mdash; not generic software adapted for the industry, but applications designed from direct field experience. Available for custom development through private consulting.</p>
     <div class="app-card">
       <div class="app-showcase">
-        <figure class="app-shot">
-          <div class="app-shot-frame">
-            <picture>
-              <source srcset="mock-survey-pro-il.webp" type="image/webp" />
-              <img src="mock-survey-pro-il.jpg" alt="Mock Life Safety Survey in the Mock Survey Pro demo, showing Illinois Title 77 (77 IAC 295) assisted living fire and life safety items with one failure" width="1040" height="1382" loading="lazy" />
-            </picture>
-          </div>
-          <figcaption><span class="app-shot-swatch" aria-hidden="true"><i style="background:#1E3A5F"></i><i style="background:#2A9D8F"></i><i style="background:#7FD6CB"></i></span>Mock Survey Pro &middot; IDPH Title 77</figcaption>
-        </figure>
         <figure class="app-shot">
           <div class="app-shot-frame">
             <picture>
